@@ -1,0 +1,26 @@
+<div class="mat-typography wrapper" fxLayout="column">
+    <div class="header-wrapper" fxLayout="row" fxLayoutAlign="center center">
+        <h2 class="header">To Do List</h2>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <div fxLayout="column" fxFlex="30">
+            <mat-form-field>
+                <input matInput type="text" placeholder="New Task..." (keydown.enter)="saveTask()" [(ngModel)]="task">
+            </mat-form-field>
+            <div *ngIf="hasTask">
+                <mat-accordion>
+                    <mat-expansion-panel>
+                      <mat-expansion-panel-header>
+                        <mat-panel-description>
+                          No Task
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+            </div>
+        </div>
+    </div>
+
+    <div fxLayout="row"></div>
+</div>
