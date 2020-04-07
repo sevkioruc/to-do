@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TaskService } from 'src/services/task.service';
 
 @Component({
   selector: 'app-homepage',
@@ -10,14 +11,18 @@ export class HomepageComponent implements OnInit {
   hasTask: number;
   task: string;
 
-  constructor() { }
+  constructor(private taskService: TaskService) { }
 
   ngOnInit() {
-
   }
 
   saveTask() {
-
+    this.taskService.addTask(this.task).subscribe((result) => {
+      console.log(result);
+    },
+    (err) => {
+      console.log(err);
+    });
   }
 
 }
