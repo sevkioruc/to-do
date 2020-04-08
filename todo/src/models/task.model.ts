@@ -1,4 +1,5 @@
 export class Task {
-    id?: number;
+    // tslint:disable-next-line: variable-name
+    _id ?: number;
     content: string;
 }

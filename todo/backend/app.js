@@ -33,7 +33,33 @@ app.post('/api/create', (req, res, next) => {
     });
     task.save();
     res.status(201).json({
+        content: req.body.content,
         message: 'Task added successfully'
+    });
+});
+
+app.get('/api/get', (req, res, next) => {
+    Task.find().then(tasks => {
+        res.status(200).json({
+            tasks: tasks
+        });
+    });
+});
+
+app.put('/api/put', (req, res, next) => {
+    Task.find().then(tasks => {
+        res.status(200).json({
+            tasks: tasks
+        });
+    });
+});
+
+app.delete('/api/delete/:id', (req, res, next) => {
+    Task.deleteOne({_id: req.params.id})
+    .then(() => {
+        res.status(200).json({
+            message: 'Task deleted'
+        });
     });
 });
 
