@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from 'src/services/task.service';
+import { Task } from 'src/models/task.model';
 
 @Component({
   selector: 'app-homepage',
@@ -12,8 +13,6 @@ export class HomepageComponent implements OnInit {
   updatedTask: string;
   updatedTaskId: string;
   tasks: any[] = [];
-
-  isClick = false;
 
   constructor(private taskService: TaskService) { }
 

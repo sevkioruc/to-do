@@ -29,10 +29,10 @@
                     </mat-panel-description>
                   </mat-expansion-panel-header>
                   <mat-form-field *ngIf="panelOpenState" class="update-input">
-                    <input matInput type="text" placeholder="New Task..."  [(ngModel)]="updatedTask">
+                    <input matInput type="text" [(ngModel)]="updatedTask">
                   </mat-form-field>
                   <div fxLayout="row" fxLayoutAlign="end end">
-                    <button mat-flat-button color="primary" (click)="deleteTask(task._id)">Delete</button>
+                    <button class="complete-btn" mat-flat-button color="warn" (click)="deleteTask(task._id)">Completed</button>
                     <button mat-flat-button color="primary" (click)="updateTask(task._id, updatedTask)">Update</button>
                   </div>
                 </mat-expansion-panel>
