@@ -46,12 +46,14 @@ app.get('/api/get', (req, res, next) => {
     });
 });
 
-app.put('/api/put', (req, res, next) => {
-    Task.find().then(tasks => {
-        res.status(200).json({
-            tasks: tasks
-        });
+app.put('/api/update/:id', (req, res, next) => {
+    const task = new Task({
+        _id: req.params.id,
+        content: req.body.content
     });
+    Task.updateOne({_id: req.params.id}, task).then(() => {
+        res.status(200).json({message: 'Task updated successfully'});
+    }).catch((err) => console.log(err));
 });
 
 app.delete('/api/delete/:id', (req, res, next) => {

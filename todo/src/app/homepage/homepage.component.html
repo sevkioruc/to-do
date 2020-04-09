@@ -2,41 +2,41 @@
     <div class="header-wrapper" fxLayout="row" fxLayoutAlign="center center">
         <h2 class="header">To Do List</h2>
     </div>
-
     <div fxLayout="row" fxLayoutAlign="center center">
         <div fxLayout="column" fxFlex="30">
-
             <mat-form-field>
                 <input matInput type="text" placeholder="New Task..." (keydown.enter)="saveTask()" [(ngModel)]="task">
             </mat-form-field>
             <div>
-                <mat-accordion *ngIf="!hasTask()">
-                  <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                      <mat-panel-description>
-                        <div>
-                          No Task
-                        </div>
-                      </mat-panel-description>
-                    </mat-expansion-panel-header>
-                  </mat-expansion-panel>
-                </mat-accordion>
-
-                <mat-accordion *ngIf="hasTask()">
-                  <mat-expansion-panel *ngFor="let task of tasks">
-                    <mat-expansion-panel-header>
-                      <mat-panel-description>
-                        <div class="content">
-                          {{task.content}}
-                        </div>
-                      </mat-panel-description>
-                    </mat-expansion-panel-header>
-                    <div fxLayout="row" fxLayoutAlign="end end">
-                      <button mat-flat-button color="primary" (click)="deleteTask(task._id)">Completed</button>
-                    </div>
-                  </mat-expansion-panel>
-                </mat-accordion>
-
+              <mat-accordion *ngIf="!hasTask()">
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-description>
+                      <div>
+                        No Task
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel>
+              </mat-accordion>
+              <mat-accordion *ngIf="hasTask()">
+                <mat-expansion-panel *ngFor="let task of tasks" (opened)="panelOpenState = true; updatedTask = task.content">
+                  <mat-expansion-panel-header>
+                    <mat-panel-description>
+                      <div class="content">
+                        {{task.content}}
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <mat-form-field *ngIf="panelOpenState" class="update-input">
+                    <input matInput type="text" placeholder="New Task..."  [(ngModel)]="updatedTask">
+                  </mat-form-field>
+                  <div fxLayout="row" fxLayoutAlign="end end">
+                    <button mat-flat-button color="primary" (click)="deleteTask(task._id)">Delete</button>
+                    <button mat-flat-button color="primary" (click)="updateTask(task._id, updatedTask)">Update</button>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
             </div>
         </div>
     </div>

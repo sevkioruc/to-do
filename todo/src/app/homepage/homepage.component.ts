@@ -9,7 +9,11 @@ import { TaskService } from 'src/services/task.service';
 export class HomepageComponent implements OnInit {
 
   task: string;
+  updatedTask: string;
+  updatedTaskId: string;
   tasks: any[] = [];
+
+  isClick = false;
 
   constructor(private taskService: TaskService) { }
 
@@ -30,7 +34,7 @@ export class HomepageComponent implements OnInit {
     });
   }
 
-  deleteTask(taskId) {
+  deleteTask(taskId: string) {
     this.taskService.deleteTask(taskId).subscribe(() => {
       const index = this.tasks.findIndex((task) => task._id === taskId);
       if (index !== -1) {
@@ -38,6 +42,14 @@ export class HomepageComponent implements OnInit {
       }
     });
   }
+
+  updateTask(taskId: string, content: string) {
+    this.taskService.updateTask(taskId, content).subscribe(() => {
+      const index = this.tasks.findIndex((task) => task._id === taskId);
+      if (index !== -1) {
+        this.tasks[index].content = content;
+      }
+    }, (err) => console.log(err));  }
 
   hasTask() {
     return this.tasks.length > 0;

@@ -20,4 +20,8 @@ export class TaskService {
     deleteTask(taskId: string) {
         return this.http.delete('http://localhost:3000/api/delete/' + taskId);
     }
+
+    updateTask(taskId: string, content: string) {
+        return this.http.put('http://localhost:3000/api/update/' + taskId, {content});
+    }
 }
