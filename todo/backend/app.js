@@ -33,7 +33,7 @@ app.post('/api/create', (req, res, next) => {
     });
     task.save();
     res.status(201).json({
-        content: req.body.content,
+        task: task,
         message: 'Task added successfully'
     });
 });
