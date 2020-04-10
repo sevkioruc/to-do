@@ -1,27 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Task } from 'src/models/task.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class TaskService {
+    private readonly baseURI = 'http://localhost:3000/api';
 
     constructor(private http: HttpClient) {
     }
 
     addTask(content: string) {
-        return this.http.post<{message: string, content: string}>('http://localhost:3000/api/create', {content});
+        return this.http.post<{task: Task}>(`${this.baseURI}/create`, {content});
     }
 
-    getTask() {
-        return this.http.get<{tasks: string[]}>('http://localhost:3000/api/get');
+    getTasks() {
+        return this.http.get<{tasks: Task[]}>(`${this.baseURI}/get`);
     }
 
     deleteTask(taskId: string) {
-        return this.http.delete('http://localhost:3000/api/delete/' + taskId);
+        return this.http.delete(`${this.baseURI}/delete/` + taskId);
     }
 
     updateTask(taskId: string, content: string) {
-        return this.http.put('http://localhost:3000/api/update/' + taskId, {content});
+        return this.http.put(`${this.baseURI}/update/` + taskId, {content});
     }
 }

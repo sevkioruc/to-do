@@ -9,10 +9,10 @@ import { Task } from 'src/models/task.model';
 })
 export class HomepageComponent implements OnInit {
 
-  task: string;
   updatedTask: string;
-  updatedTaskId: string;
-  tasks: any[] = [];
+  tasks: Task[] = [];
+
+  private task: string;
 
   constructor(private taskService: TaskService) { }
 
@@ -22,13 +22,13 @@ export class HomepageComponent implements OnInit {
 
   saveTask() {
     this.taskService.addTask(this.task).subscribe((result) => {
-      this.tasks.push(result);
+      this.tasks.push(result.task);
       this.task = '';
     }, (err) => console.log(err));
   }
 
   getAllTask() {
-    this.taskService.getTask().subscribe((result) => {
+    this.taskService.getTasks().subscribe((result) => {
       this.tasks = result.tasks;
     });
   }
@@ -48,7 +48,8 @@ export class HomepageComponent implements OnInit {
       if (index !== -1) {
         this.tasks[index].content = content;
       }
-    }, (err) => console.log(err));  }
+    });
+  }
 
   hasTask() {
     return this.tasks.length > 0;
