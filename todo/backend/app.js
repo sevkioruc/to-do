@@ -52,7 +52,10 @@ app.put('/api/update/:id', (req, res, next) => {
         content: req.body.content
     });
     Task.updateOne({_id: req.params.id}, task).then(() => {
-        res.status(200).json({message: 'Task updated successfully'});
+        res.status(200).json({
+            message: 'Task updated successfully',
+            task: task
+        });
     }).catch((err) => console.log(err));
 });
 

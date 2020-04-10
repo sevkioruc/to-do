@@ -20,10 +20,11 @@ export class TaskService {
     }
 
     deleteTask(taskId: string) {
-        return this.http.delete(`${this.baseURI}/delete/` + taskId);
+        return this.http.delete<{message: string}>(`${this.baseURI}/delete/` + taskId);
     }
 
     updateTask(taskId: string, content: string) {
-        return this.http.put(`${this.baseURI}/update/` + taskId, {content});
+        return this.http.put<{message: string, task: Task}>(`${this.baseURI}/update/` + taskId, {content});
     }
+
 }
